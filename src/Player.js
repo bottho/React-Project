@@ -3,7 +3,9 @@ import React from 'react';
 class PlayerList extends React.Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      players : []
+    };
   }
 
   componentDidMount(){
@@ -19,16 +21,39 @@ class PlayerList extends React.Component {
         return response.json();
     })
     .then(function(data){
-      that.setState({ players : data});
+      that.setState({ players : data.dailyplayerstats.playerstatsentry });
     })
   }
 
   render() {
     return (
       <div>
-        { this.state.players}
+        <Player playerData = {this.state.players} />
       </div>
     );
   }
 }
+
+function Player(playerData)
+{
+  var players = playerData.playerData;
+  var output = <div>No player data</div>;
+  if(players.length)
+  {
+    output = players.map((item) => PlayerName(item));
+  }
+  return <div>{output}</div>;
+}
+
+function PlayerName(item)
+{
+  console.log(item);
+  return (
+    <div className="playerObj" key={item.player.Id} >
+      <div className="playerName">{item.player.LastName}, {item.player.FirstName}</div>
+      <div className="playerCity">{item.team.City} {item.team.Name}</div>
+    </div>
+  );
+}
+
 export default PlayerList;
