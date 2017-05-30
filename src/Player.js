@@ -27,7 +27,7 @@ class PlayerList extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="row">
         <Player playerData = {this.state.players} />
       </div>
     );
@@ -42,16 +42,24 @@ function Player(playerData)
   {
     output = players.map((item) => PlayerName(item));
   }
-  return <div>{output}</div>;
+  return <div className="btn btn-group-vertical">{output}</div>;
 }
 
 function PlayerName(item)
 {
-  console.log(item);
+  console.log(item.player);
   return (
-    <div className="playerObj" key={item.player.Id} >
-      <div className="playerName">{item.player.LastName}, {item.player.FirstName}</div>
-      <div className="playerCity">{item.team.City} {item.team.Name}</div>
+    <div className={ "col-xs-12 col-md-6 team-" + item.team.ID } key={item.player.Id} >
+      <h3 className="playerName">{item.player.LastName}, {item.player.FirstName}</h3>
+      <small className="playerCity">{item.team.City} {item.team.Name}</small>
+    </div>
+  );
+}
+
+function PlayerStats(item)
+{
+  return (
+    <div className="">
     </div>
   );
 }

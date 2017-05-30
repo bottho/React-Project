@@ -1,27 +1,120 @@
-body{
-  font-family: 'Roboto', sans-serif;
+.team-1{
+  background-color: #F57D31;
+  color: #000;
 }
-
-.playerObj{
-  width:50%;
-  height:10%;
-  display: block;
-  color: black;
+.team-2{
+  background-color: #F57D31;
+  color: #000;
 }
-
-.playerObj:hover{
-  background-color: rgb(0, 0, 125);
-  color: white;
+.team-3{
+  background-color: #F57D31;
+  color: #000;
 }
-
-.playerObjFocus{
-  height: 50%;
+.team-4{
+  background-color: #F57D31;
+  color: #000;
 }
-
-.playerName{
-  font-size: 1.5em;
+.team-5{
+  background-color: #F57D31;
+  color: #000;
 }
-
-.playerCity{
-  font-size: 0.5em;
+.team-6{
+  background-color: #F57D31;
+  color: #000;
+}
+.team-7{
+  background-color: #F57D31;
+  color: #000;
+}
+.team-8{
+  background-color: #F57D31;
+  color: #000;
+}
+.team-9{
+  background-color: #F57D31;
+  color: #000;
+}
+.team-10{
+  background-color: #F57D31;
+  color: #000;
+}
+.team-11{
+  background-color: #F57D31;
+  color: #000;
+}
+.team-12{
+  background-color: #013E7F;
+  color: #FFF;
+}
+.team-13{
+  background-color: #E51837;
+  color: #FFF;
+}
+.team-14{
+  background-color: #F57D31;
+  color: #000;
+}
+.team-15{
+  background-color: #F57D31;
+  color: #000;
+}
+.team-16{
+  background-color: #F57D31;
+  color: #000;
+}
+.team-17{
+  background-color: #00529C;
+  color: #FFF;
+}
+.team-18{
+  background-color: #F57D31;
+  color: #000;
+}
+.team-19{
+  background-color: #F57D31;
+  color: #000;
+}
+.team-20{
+  background-color: #C60C30;
+  color: #FFF;
+}
+.team-21{
+  background-color: #F57D31;
+  color: #000;
+}
+.team-22{
+  background-color: #F57D31;
+  color: #000;
+}
+.team-23{
+  background-color: #CB0D0D;
+  color: #FDBF12;
+}
+.team-24{
+  background-color: #013E7F;
+  color: #EB6E1E;
+}
+.team-25{
+  background-color: #F57D31;
+  color: #000;
+}
+.team-26{
+  background-color: #007889;
+  color: #FFF;
+}
+.team-27{
+  background-color: #F57D31;
+  color: #000;
+}
+.team-28{
+  background-color: #000;
+  color: #FFF;
+}
+.team-29{
+  background-color: #F57D31;
+  color: #000;
+}
+.team-30{
+  background-color: #F57D31;
+  color: #000;
 }
