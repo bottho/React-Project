@@ -4,7 +4,9 @@ import PlayerList from './Player';
 
 document.addEventListener('DOMContentLoaded', function() {
   ReactDOM.render(
-    <PlayerList />,
+    <div className="container">
+      <PlayerList />
+    </div>,
     document.getElementById('mount')
   );
 });

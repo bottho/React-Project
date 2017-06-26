@@ -4,7 +4,9 @@ class PlayerList extends React.Component {
   constructor() {
     super();
     this.state = {
-      players : []
+      players : [],
+      sort : "Team",
+      selectedPlayer : []
     };
   }
 
@@ -21,47 +23,134 @@ class PlayerList extends React.Component {
         return response.json();
     })
     .then(function(data){
-      that.setState({ players : data.dailyplayerstats.playerstatsentry });
+      that.setState({ players : data.dailyplayerstats.playerstatsentry })
     })
   }
 
   render() {
+    var output = <div>No player data</div>;
+
+    if(this.state.players.length)
+    {
+      output = this.state.players.map((item) => <PlayerName key = {item.player.Id} player = {item} selectClick = {this.selectPlayer.bind(this, item)} />);
+    }
+
     return (
       <div className="row">
-        <Player playerData = {this.state.players} />
+        <SortButtons
+          sortByTeam = {this.sortTeam.bind(this)}
+          sortByPosition = {this.sortPosition.bind(this)}
+          sortByName = {this.sortName.bind(this)} />
+
+        <div key="PlayerList" className="col-md-6 col-xs-12">{output}</div>
+
+        <PlayerStats selectedPlayer = {this.state.selectedPlayer} />
       </div>
     );
   }
-}
 
-function Player(playerData)
-{
-  var players = playerData.playerData;
-  var output = <div>No player data</div>;
-  if(players.length)
+  sortTeam()
   {
-    output = players.map((item) => PlayerName(item));
+    this.setState({sort:"Team"});
+
+    var sortedPlayers = this.state.players.sort(function(a,b){
+      return a.team.ID - b.team.ID;
+    });
+
+    this.setState({players: sortedPlayers });
   }
-  return <div className="btn btn-group-vertical">{output}</div>;
+
+  sortPosition()
+  {
+    this.setState({sort:"Position"});
+
+    var sortedPlayers = this.state.players.sort(function(a,b){
+      return a.player.Position - b.player.Position;
+    });
+
+    this.setState({players: sortedPlayers});
+  }
+
+  sortName()
+  {
+    this.setState({sort:"Name"});
+
+    var sortedPlayers = this.state.players.sort(function(a,b){
+      return a.player.LastName - b.player.LastName;
+    });
+
+    this.setState({players: sortedPlayers});
+  }
+
+  selectPlayer(player)
+  {
+    console.log("Select Player: ");
+    console.log(player);
+    this.setState({selectedPlayer : player});
+
+    console.log("selectedPlayer: ");
+    console.log(this.state.selectedPlayer);
+  }
 }
 
-function PlayerName(item)
+function SortButtons(props)
 {
-  console.log(item.player);
+  const {sortByTeam, sortByName, sortByPosition} = props;
+  return(
+    <div>
+      <button type="button" className="btn btn-default col-xs-4 col-md-4" onClick={props.sortByTeam}>Team</button>
+      <button type="button" className="btn btn-default col-xs-4 col-md-4" onClick={props.sortByPosition}>Position</button>
+      <button type="button" className="btn btn-default col-xs-4 col-md-4" onClick={props.sortByName}>Name</button>
+    </div>
+  );
+}
+
+function PlayerName(props)
+{
   return (
-    <div className={ "col-xs-12 col-md-6 team-" + item.team.ID } key={item.player.Id} >
-      <h3 className="playerName">{item.player.LastName}, {item.player.FirstName}</h3>
-      <small className="playerCity">{item.team.City} {item.team.Name}</small>
+    <div onClick={props.selectClick} key={props.key} className={ "player row col-xs-12 col-md-12 team-" + props.player.team.ID } >
+      <div className="col-md-2 col-xs-2">
+        <img className="img-responsive logo" src={"/images/Team_" + props.player.team.ID + ".svg"} />
+      </div>
+      <div className="col-md-10 col-xs-10 playerName">
+      {props.player.player.LastName}, {props.player.player.FirstName}<br />
+      <small>{props.player.team.City} {props.player.team.Name}</small>
+      </div>
     </div>
   );
 }
 
 function PlayerStats(item)
 {
-  return (
-    <div className="">
-    </div>
-  );
+  console.log("Player Stats for:")
+  console.log(item.selectedPlayer);
+  if(item.selectedPlayer.player) {
+    return (
+        <div className={"statWindow col-md-6 team-" + item.selectedPlayer.team.ID}>
+          <div className="col-md-12">
+            <img src={"/images/Team_" + item.selectedPlayer.team.ID + ".svg"} />
+          </div>
+          <div className="col-md-4">
+            <div className="playerNumber col-md-6">{item.selectedPlayer.player.JerseyNumber}<br /><small>Number</small></div>
+            <div className="playerPosition col-md-6">{item.selectedPlayer.player.Position}<br /><small>Position</small></div>
+          </div>
+          <div className="playerName col-md-8">{item.selectedPlayer.player.FirstName} {item.selectedPlayer.player.LastName}</div>
+          <br />
+          <div className="playerAge">{item.selectedPlayer.player.Age}</div>
+          <div className="playerHeight">{item.selectedPlayer.player.Height}</div>
+          <div className="playerWeight">{item.selectedPlayer.player.Weight}</div>
+          <div className="playerCity">{item.selectedPlayer.player.BirthCity}</div>
+          <div className="playerCountry">{item.selectedPlayer.player.BirthCountry}</div>
+        </div>
+    );
+  }
+  else {
+    return(
+      <div className="statWindow col-md-6 col-xs-12">
+        <img className="img-responsive col-md-12 col-xs-12" src="/images/NHL_Shield.svg" />
+      </div>
+    );
+  }
 }
 
 export default PlayerList;
