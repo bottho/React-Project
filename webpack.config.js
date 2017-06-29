@@ -10,6 +10,25 @@ module.exports = {
     filename: 'bundle.js',
   },
   module: {
+    loaders: [
+      {
+        test: /\.scss$/,
+        loaders: ["style-loader", "css-loader", "sass-loader"]
+      },
+      {
+        test: /\.css$/,
+        loader: ["style", "css"]
+      },
+      {
+        test: /\.woff2?$|\.ttf$|\.eot$|\.svg$/,
+        loader: "file"
+      },
+      {
+        test: /\.js$/,
+        exclude: /(node_modules|bower_components)/,
+        loader: 'react-hot'
+      }
+    ],
     rules: [
       {
         test: /\.js$/,

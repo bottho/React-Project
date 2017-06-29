@@ -1,0 +1,108 @@
+$primary-color: #8278f3;
+$text-color: #FFF;
+$background-color: #4c5868;
+$body-color: #39414e;
+
+@mixin circle($size: 100px) {
+  width: $size;
+  height: $size;
+  position: relative;
+
+  -webkit-border-radius: $size / 2 + 0px;
+  -moz-border-radius: $size / 2 + 0px;
+  border-radius: $size / 2 + 0px;
+
+  & > div, span {
+    width: $size - $size*0.3;
+    height: $size - $size*0.3;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    margin: auto;
+    text-align: center;
+  }
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+body {
+  background-color: $body-color !important;
+}
+
+.logo {
+  @include circle(100px);
+  background: #FFF;
+  padding: 5px;
+
+  img {
+    margin: auto;
+    display: block;
+    max-width: 75%;
+    max-height: 75%;
+    transform: translate(0%, 25%);
+  }
+}
+
+.playerList {
+  .player {
+    @include border-radius(15px);
+    margin: 2% 0 0 1%;
+    padding: 5%;
+    background-color: $background-color;
+    color: $text-color;
+  }
+
+  .selected {
+    border: 3px solid $primary-color;
+  }
+}
+
+
+
+.playerName {
+  font-size: 2em;
+
+  small{
+    font-size: 75%;
+  }
+}
+
+.statWindow {
+  font-size: 3em;
+  color: $text-color;
+
+  .playerName {
+    font-size: 1em;
+  }
+
+  small {
+    font-size: 50%;
+  }
+
+  .playerOrigin {
+    font-size: 0.6em;
+  }
+
+  .playerBio {
+    font-size: 0.75em;
+  }
+
+  .teamLogo {
+    @include circle(200px);
+    background: #FFF;
+    padding: 10px;
+    margin: auto;
+
+    img{
+      margin: auto;
+      display: block;
+      max-width: 75%;
+      max-height: 75%;
+      transform: translate(0%, 25%);
+    }
+  }
+}
