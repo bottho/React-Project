@@ -2,6 +2,8 @@ $primary-color: #8278f3;
 $text-color: #FFF;
 $background-color: #4c5868;
 $body-color: #39414e;
+$screen-sm: 768px;
+$screen-md: 992px;
 
 @mixin circle($size: 100px) {
   width: $size;
@@ -50,8 +52,8 @@ body {
 .playerList {
   .player {
     @include border-radius(15px);
-    margin: 2% 0 0 1%;
-    padding: 5%;
+    margin: 2% 0 0 0;
+    padding: 2%;
     background-color: $background-color;
     color: $text-color;
   }
@@ -74,6 +76,8 @@ body {
 .statWindow {
   font-size: 3em;
   color: $text-color;
+  background-color: $background-color;
+  padding-top: 2%;
 
   .playerName {
     font-size: 1em;
@@ -105,4 +109,26 @@ body {
       transform: translate(0%, 25%);
     }
   }
+
+  @media (min-width: $screen-sm) and (max-width: $screen-md) {
+    height: 30%;
+    position: fixed !important;
+    bottom: 0;
+    border-top: 3px solid $primary-color;
+
+    small{
+      font-size: 75%;
+    }
+  }
+  @media (min-width: $screen-md){
+    height: 100%;
+  }
+}
+
+button {
+  color: $text-color !important;
+  font-size: 2em !important;
+  background-color: $primary-color !important;
+  border: 0 !important;
+  height: 5% !important;
 }
