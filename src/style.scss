@@ -60,6 +60,9 @@ body {
 
   .selected {
     border: 3px solid $primary-color;
+    padding: -webkit-calc(2% - 3px);
+    padding:    -moz-calc(2% - 3px);
+    padding:         calc(2% - 3px);
   }
 }
 
@@ -92,11 +95,11 @@ body {
   }
 
   .playerBio {
-    font-size: 0.75em;
+    font-size: 0.7em;
   }
 
   .teamLogo {
-    @include circle(200px);
+    @include circle(150px);
     background: #FFF;
     padding: 10px;
     margin: auto;
@@ -111,7 +114,7 @@ body {
   }
 
   @media (min-width: $screen-sm) and (max-width: $screen-md) {
-    height: 30%;
+    height: 20%;
     position: fixed !important;
     bottom: 0;
     border-top: 3px solid $primary-color;
@@ -122,6 +125,14 @@ body {
   }
   @media (min-width: $screen-md){
     height: 100%;
+  }
+
+  @media (orientation:landscape){
+    height: 30%;
+    font-size: 2.5em;
+    .teamLogo {
+      @include circle(125px);
+    }
   }
 }
 

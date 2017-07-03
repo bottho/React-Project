@@ -122,22 +122,24 @@ function PlayerStats(item)
   if(item.selectedPlayer.player) {
     return (
         <div className="statWindow col-md-6 col-xs-12">
-          <div className="col-md-12 col-xs-3 teamLogo">
-            <img src={"/images/Team_" + item.selectedPlayer.team.ID + ".svg"} />
+          <div className="col-md-12 col-sm-2 col-xs-3">
+            <div className="teamLogo">
+              <img src={"/images/Team_" + item.selectedPlayer.team.ID + ".svg"} />
+            </div>
           </div>
-          <div className="col-xs-9 col-md-12">
-            <div className="col-md-4 col-xs-3">
+          <div className="col-md-12 col-sm-10 col-xs-8">
+            <div className="col-md-4 col-sm-2 col-xs-3">
               <div className="playerNumber col-md-12">{item.selectedPlayer.player.JerseyNumber}</div>
               <div className="playerPosition col-md-12">{item.selectedPlayer.player.Position}</div>
             </div>
-            <div className="playerName col-md-8 col-xs-6">{item.selectedPlayer.player.FirstName} {item.selectedPlayer.player.LastName}</div>
-            <div className="clearfix"></div>
-            <div className="col-md-6 col-xs-6 playerBio">
+            <div className="playerName col-md-8 col-sm-4 col-xs-6">{item.selectedPlayer.player.FirstName} {item.selectedPlayer.player.LastName}</div>
+            <div className="clearfix visible-md"></div>
+            <div className="col-md-6 col-sm-3 col-xs-6 playerBio">
               <div className="playerAge"><small>Age:</small> {item.selectedPlayer.player.Age}</div>
               <div className="playerHeight"><small>Height:</small> {item.selectedPlayer.player.Height}</div>
               <div className="playerWeight"><small>Weight:</small> {item.selectedPlayer.player.Weight} lbs</div>
             </div>
-            <div className="col-md-6 col-xs-6 playerOrigin">
+            <div className="col-md-6 col-sm-3 col-xs-6 playerOrigin">
               <small>From:</small>
               <div className="playerCity">{item.selectedPlayer.player.BirthCity}</div>
               <div className="playerCountry">{item.selectedPlayer.player.BirthCountry}</div>
