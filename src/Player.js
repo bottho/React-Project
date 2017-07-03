@@ -5,7 +5,7 @@ class PlayerList extends React.Component {
     super();
     this.state = {
       players : [],
-      sort : "Team",
+      sort : "",
       selectedPlayer : []
     };
   }
@@ -32,7 +32,45 @@ class PlayerList extends React.Component {
 
     if(this.state.players.length)
     {
-      output = this.state.players.map((item) => <PlayerName key = {item.player.Id} player = {item} selectClick = {this.selectPlayer.bind(this, item)} selectedPlayer={this.state.selectedPlayer} />);
+      var curCat = "";
+      output = this.state.players.map((item) => {
+        var catBar = null;
+        if(this.state.sort == "Team" && curCat != item.team.ID){
+          curCat = item.team.ID;
+          catBar =(
+            <div className="category row col-xs-12 col-md-12">
+              <div className="logo">
+                <img className="img-responsive" src={"/images/Team_" + item.team.ID + ".svg"} />
+              </div>
+            </div>
+        );
+      }else if (this.state.sort == "Name" && curCat != item.player.LastName[0].toUpperCase()) {
+          curCat = item.player.LastName[0].toUpperCase();
+          catBar = (
+            <div className="category row col-xs-12 col-md-12">
+              <div>
+                -{curCat}-
+              </div>
+            </div>
+          );
+        }else if (this.state.sort == "Position" && curCat != item.player.Position) {
+          curCat = item.player.Position;
+          catBar = (
+            <div className="category row col-xs-12 col-md-12">
+              <div>
+                -{curCat}-
+              </div>
+            </div>
+          );
+        }
+
+        return(
+          <div>
+            {catBar}
+            <PlayerName key = {item.player.Id} player = {item} selectClick = {this.selectPlayer.bind(this, item)} selectedPlayer={this.state.selectedPlayer} />
+          </div>
+        );
+      });
     }
 
     return (
@@ -41,10 +79,11 @@ class PlayerList extends React.Component {
           sortByTeam = {this.sortTeam.bind(this)}
           sortByPosition = {this.sortPosition.bind(this)}
           sortByName = {this.sortName.bind(this)} />
+        <div className="col-md-12">
+          <div key="PlayerList" className="playerList col-md-6 col-xs-12">{output}</div>
 
-        <div key="PlayerList" className="playerList col-md-6 col-xs-12">{output}</div>
-
-        <PlayerStats selectedPlayer = {this.state.selectedPlayer} />
+          <PlayerStats selectedPlayer = {this.state.selectedPlayer} />
+        </div>
       </div>
     );
   }
@@ -54,7 +93,9 @@ class PlayerList extends React.Component {
     this.setState({sort:"Team"});
 
     var sortedPlayers = this.state.players.sort(function(a,b){
-      return a.team.ID - b.team.ID;
+      if(a.team.City < b.team.City) return -1;
+      if(a.team.City > b.team.City) return 1;
+      return 0;
     });
 
     this.setState({players: sortedPlayers });
@@ -65,7 +106,9 @@ class PlayerList extends React.Component {
     this.setState({sort:"Position"});
 
     var sortedPlayers = this.state.players.sort(function(a,b){
-      return a.player.Position - b.player.Position;
+      if(a.player.Position < b.player.Position) return -1;
+      if(a.player.Position > b.player.Position) return 1;
+      return 0;
     });
 
     this.setState({players: sortedPlayers});
@@ -76,7 +119,9 @@ class PlayerList extends React.Component {
     this.setState({sort:"Name"});
 
     var sortedPlayers = this.state.players.sort(function(a,b){
-      return a.player.LastName - b.player.LastName;
+      if(a.player.LastName.toUpperCase() < b.player.LastName.toUpperCase()) return -1;
+      if(a.player.LastName.toUpperCase() > b.player.LastName.toUpperCase()) return 1;
+      return 0;
     });
 
     this.setState({players: sortedPlayers});
@@ -92,7 +137,7 @@ function SortButtons(props)
 {
   const {sortByTeam, sortByName, sortByPosition} = props;
   return(
-    <div>
+    <div className="col-xs-12 col-md-12">
       <button type="button" className="btn btn-default col-xs-4 col-md-4" onClick={props.sortByTeam}>Team</button>
       <button type="button" className="btn btn-default col-xs-4 col-md-4" onClick={props.sortByPosition}>Position</button>
       <button type="button" className="btn btn-default col-xs-4 col-md-4" onClick={props.sortByName}>Name</button>
@@ -151,7 +196,9 @@ function PlayerStats(item)
   else {
     return(
       <div className="statWindow col-md-6 col-xs-12">
-        <img className="img-responsive col-md-12 col-xs-12" src="/images/NHL_Shield.svg" />
+        <div className="teamLogo">
+          <img className="img-responsive" src="/images/NHL_Shield.svg" />
+        </div>
       </div>
     );
   }

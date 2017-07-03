@@ -1,6 +1,7 @@
 $primary-color: #8278f3;
 $text-color: #FFF;
 $background-color: #4c5868;
+$highlight-color: #79899e;
 $body-color: #39414e;
 $screen-sm: 768px;
 $screen-md: 992px;
@@ -64,9 +65,21 @@ body {
     padding:    -moz-calc(2% - 3px);
     padding:         calc(2% - 3px);
   }
+
+  .category {
+      @include border-radius(15px);
+      background-color: $highlight-color;
+      margin: 2% 0 0 0;
+      padding: 2%;
+      color: $text-color;
+      font-size: 2em;
+      text-align: center;
+
+      .logo{
+        margin: auto;
+      }
+  }
 }
-
-
 
 .playerName {
   font-size: 2em;
@@ -115,6 +128,7 @@ body {
 
   @media (min-width: $screen-sm) and (max-width: $screen-md) {
     height: 20%;
+    max-height: 200px;
     position: fixed !important;
     bottom: 0;
     border-top: 3px solid $primary-color;
@@ -129,6 +143,7 @@ body {
 
   @media (orientation:landscape){
     height: 30%;
+    max-height: 200px;
     font-size: 2.5em;
     .teamLogo {
       @include circle(125px);
