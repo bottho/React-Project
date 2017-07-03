@@ -50,13 +50,37 @@ body {
   }
 }
 
+.controlRow{
+  height: 10%;
+  max-height: 60px;
+  padding: 0px;
+
+  button:focus {
+    color: $text-color;
+    background-color: $primary-color;
+
+  }
+
+  button{
+    color: $text-color;
+    font-size: 2em;
+    background-color: $highlight-color;
+    border: 0;
+  }
+}
+
 .playerList {
+  padding: 0;
+
   .player {
     @include border-radius(15px);
-    margin: 2% 0 0 0;
+    margin: 2% 15px 0 0;
     padding: 2%;
     background-color: $background-color;
     color: $text-color;
+    width:  -webkit-calc(100% - 15px);
+    width:     -moz-calc(100% - 15px);
+    width:          calc(100% - 15px);
   }
 
   .selected {
@@ -69,11 +93,14 @@ body {
   .category {
       @include border-radius(15px);
       background-color: $highlight-color;
-      margin: 2% 0 0 0;
+      margin: 2% 15px 0 0;
       padding: 2%;
       color: $text-color;
       font-size: 2em;
       text-align: center;
+      width:  -webkit-calc(100% - 15px);
+      width:     -moz-calc(100% - 15px);
+      width:          calc(100% - 15px);
 
       .logo{
         margin: auto;
@@ -93,7 +120,7 @@ body {
   font-size: 3em;
   color: $text-color;
   background-color: $background-color;
-  padding-top: 2%;
+  padding: 2% 0 0 0;
 
   .playerName {
     font-size: 1em;
@@ -149,12 +176,4 @@ body {
       @include circle(125px);
     }
   }
-}
-
-button {
-  color: $text-color !important;
-  font-size: 2em !important;
-  background-color: $primary-color !important;
-  border: 0 !important;
-  height: 5% !important;
 }

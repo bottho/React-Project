@@ -137,10 +137,10 @@ function SortButtons(props)
 {
   const {sortByTeam, sortByName, sortByPosition} = props;
   return(
-    <div className="col-xs-12 col-md-12">
-      <button type="button" className="btn btn-default col-xs-4 col-md-4" onClick={props.sortByTeam}>Team</button>
-      <button type="button" className="btn btn-default col-xs-4 col-md-4" onClick={props.sortByPosition}>Position</button>
-      <button type="button" className="btn btn-default col-xs-4 col-md-4" onClick={props.sortByName}>Name</button>
+    <div className="col-xs-12 col-md-12 controlRow">
+      <button type="button" className="btn col-xs-4 col-md-4" onClick={props.sortByTeam}>Team</button>
+      <button type="button" className="btn col-xs-4 col-md-4" onClick={props.sortByPosition}>Position</button>
+      <button type="button" className="btn col-xs-4 col-md-4" onClick={props.sortByName}>Name</button>
     </div>
   );
 }
